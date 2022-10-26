@@ -1,6 +1,6 @@
 import React from "react";
 
-const car = () => {
+const Car = () => {
   return (
     <div>
       <p>Merke</p>
@@ -10,4 +10,4 @@ const car = () => {
   );
 };
 
-export default car;
+export default Car;
