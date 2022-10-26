@@ -1,6 +1,6 @@
-# Abreidskrav Blackjack
+# Abreidskrav Bil-Register
 
-Blackjack game built with React and ViteJS
+Bil-Register
 
 ### start
 
@@ -24,10 +24,8 @@ Build production for deployment.
 
 ## API Documentation
 
-| Name             | Request type | Endpoint                          | Body                                                                                  |
-| ---------------- | ------------ | --------------------------------- | ------------------------------------------------------------------------------------- | ---- |
-|                  |              | Person                            |                                                                                       |
-| Get a person     | GET          | http://194.32.107.29/GaAPI/{id}   |                                                                                       |
-| Add a new Person | POST         | http://194.32.107.29/GaAPI/person | { "firstName": "string", "lastName": "string, "age": "integer", "carsOwned": "string" | null |
-
-}
+| Name             | Request type | Endpoint                          | Body |
+| ---------------- | ------------ | --------------------------------- | ---- |
+|                  |              | Person                            |      |
+| Get a person     | GET          | http://194.32.107.29/GaAPI/{id}   |      |
+| Add a new Person | POST         | http://194.32.107.29/GaAPI/person |      |
