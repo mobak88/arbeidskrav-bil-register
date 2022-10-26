@@ -21,3 +21,8 @@ Build production for deployment.
 # or
 
 `yarn build`
+
+## API Documentation
+
+|Name | Request type | Endpoint | Body |
+|-----|--------------|Person----|------|
