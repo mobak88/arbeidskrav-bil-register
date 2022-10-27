@@ -14,7 +14,7 @@
   "trailingComma": "none",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
-  "printWidth": 140,
+  "printWidth": 80,
   "tabWidth": 2,
   "rangeStart": 0
 }
