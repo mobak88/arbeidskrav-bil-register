@@ -1,4 +1,11 @@
+import API_ENDPOINTS from '../../api/endpoints';
+import useFetch from '../../hooks/useFetch';
+
+
+
 const person = () => {
+
+    const { loading, error, data } = useFetch(`${API_ENDPOINTS}`);
     return (
       <div>
         <h3>User information:</h3>

@@ -6,7 +6,7 @@ import API_ENDPOINTS from "./api/endpoints";
 import "./App.css";
 
 function App() {
-  const { loading, error, data } = useFetch(`${API_ENDPOINTS.all}`);
+  const { loading, error, data } = useFetch(`${API_ENDPOINTS.car(1)}`);
 
   if (data) console.log(data);
 

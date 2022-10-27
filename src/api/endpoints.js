@@ -1,14 +1,13 @@
-const BASE_URL_PERSON = import.meta.env.VITE_API_URL_PERSON;
-const BASE_URL_CAR = import.meta.env.VITE_API_URL_PERSON;
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 
 const API_ENDPOINTS = {
-    all: `${BASE_URL_PERSON}`,
+    all: `${BASE_URL}`,
     person: function(id) {
-        return `${BASE_URL_PERSON}/person/${id}`;
+        return `${BASE_URL}/person/${id}`;
     },
     car: function(id) {
-        return `${BASE_URL_CAR}/car/${id}`;
+        return `${BASE_URL}/car/${id}`;
     },
 };
-
 export default API_ENDPOINTS;
