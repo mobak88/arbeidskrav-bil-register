@@ -1,41 +1,42 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useAxiosFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+const useAxiosFetch = (dataUrl) => {
+  const [data, setData] = useState([]);
+  const [fetchError, setFetchError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
 
   useEffect(() => {
-    const abortController = new AbortController();
+    let isMounted = true;
+    const source = axios.CancelToken.source();
 
-    const fetchData = async () => {
-      setLoading(true);
-
+    const fetchData = async (url) => {
+      setIsLoading(true)
       try {
-        const res = await axios.get(url, {
-          signal: abortController.signal,
-        });
-        const json = await res.json();
-
-        setData(json);
-        setLoading(false);
-      } catch (error) {
-        if (error.name === "AbortError") {
-          console.log("Fetch aborted");
-        } else {
-          setLoading(false);
-          setError(error);
+        const response = await axios.get(url, { cancelToken: source.token });
+        if (isMounted) {
+          setData(response.data);
+          setFetchError(null);
         }
+      } catch (err) {
+        if(isMounted){
+          setFetchError(err.message);
+          setData([]);
+        }
+      } finally {
+        isMounted && setTimeout(()=> setIsLoading(false), 2000);
       }
-    };
-
-    fetchData();
-
-    return () => abortController.abort();
-  }, [url]);
-
-  return { loading, error, data };
-};
+    }
+    fetchData(dataUrl);
+    
+    const cleanUp = () => {
+      console.log('Cleaning up')
+      isMounted = false;
+      source.cancel();
+    }
+    return cleanUp;
+  },[dataUrl]);
+  return { data, fetchError, isLoading };
+}
 
 export default useAxiosFetch;
