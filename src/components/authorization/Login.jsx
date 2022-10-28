@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect} from 'react';
 import useAuth from '../../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Form, Button} from 'semantic-ui-react';
 import axios from 'axios';
+import "./Login.css";
 
 const LOGIN_URL = '/auth';
 
@@ -54,11 +54,11 @@ const Login = () => {
         }
     }
         return (
-        <section>
+        <section className='login-container'>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign In</h1>
-            <Form onSubmit={handleSubmit}>
-                <Form.Field>
+            <form onSubmit={handleSubmit}>
+
                     <label name="username">Username:</label>
                     <input type="text"
                      id="username" 
@@ -67,9 +67,8 @@ const Login = () => {
                     value={user}
                     required
                     />
-                </Form.Field>
-
-                <Form.Field>
+            
+                
                     <label name="password">Password:</label>
                     <input type="text"
                      id="password"  
@@ -77,10 +76,9 @@ const Login = () => {
                     value={password}
                     required
                     />
-                </Form.Field>
-                <Button> Sign In</Button>
-                <Link to = "/"><Button>Cancel</Button></Link>
-            </Form>
+                <button className='btn sign-in'> Sign In</button>
+                <Link to = "/"><button className='btn cancel'>Cancel</button></Link>
+            </form>
             <p> Not registred yet?
                 <br />
                 <Link to="/register"> Sign up</Link>

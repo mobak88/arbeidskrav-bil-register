@@ -3,6 +3,8 @@ import { Outlet } from "react-router";
 const Layout = () => {
     return (
         <main className="App">
+        <h1> Hey and welcome</h1>
+        <Link to="login"><button>Log in</button></Link>
             <Outlet/>
         </main>
     )

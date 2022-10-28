@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
 
 const CreatePerson = () => {
