@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Car from "./components/car/car";
-import CreatePerson from "./components/person/createPerson";
+import CreatePerson from "./components/person/CreatePerson";
 import Login from './components/authorization/Login';
 import Unathorized from "./components/authorization/Unauthorization";
 import RequireAuth from "./components/authorization/RequireAuth";
@@ -34,4 +34,3 @@ function App() {
   );
 }
 export default App;
-
