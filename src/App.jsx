@@ -8,7 +8,7 @@ import RequireAuth from "./components/authorization/RequireAuth";
 import useAxiosFetch from "./hooks/useAxiosFetch";
 import API_ENDPOINTS from "./api/endpoints";
 import AuthContext from "./context/AuthProvider";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 const ROLES = {
@@ -17,8 +17,8 @@ const ROLES = {
 }
 
 function App() {
-  const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
-  
+  const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.car(20)}`);
+  console.log(data);
   return (
       <div className="main-container">
         <Routes>

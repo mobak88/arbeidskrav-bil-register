@@ -22,8 +22,7 @@ const CreatePerson = () => {
 
   return (
     <div>
-      <Form>
-        <Form.Field>
+      <form> 
           <label htmlFor='fname'>First Name</label>
           <input
             name='fname'
@@ -31,9 +30,7 @@ const CreatePerson = () => {
             onChange={(e) => setFirstName(e.target.value)}
             placeholder='First Name'
           />
-        </Form.Field>
 
-        <Form.Field>
           <label htmlFor='lname'>Last Name</label>
           <input
             name='lname'
@@ -41,9 +38,7 @@ const CreatePerson = () => {
             onChange={(e) => setLastName(e.target.value)}
             placeholder='Last Name'
           />
-        </Form.Field>
-
-        <Form.Field>
+    
           <label htmlFor='age'>Age</label>
           <input
             type='number'
@@ -52,9 +47,7 @@ const CreatePerson = () => {
             onChange={(e) => setAge(e.target.value)}
             placeholder='Your age'
           />
-        </Form.Field>
 
-        <Form.Field>
           <label htmlFor='carOwned'>Cars you own </label>
           <input
             name='carOwned'
@@ -62,12 +55,12 @@ const CreatePerson = () => {
             onChange={(e) => setCarsOwned(e.target.value)}
             placeholder='Your Carbrand'
           />
-        </Form.Field>
-        <Button type='submit' onClick={sendDataToAPI}>
+
+        <button type='submit' onClick={sendDataToAPI}>
           Submit
-        </Button>
-        <Button onClick={test}>Cancel</Button>
-      </Form>
+        </button>
+        <button onClick={test}>Cancel</button>
+      </form>
     </div>
   );
 };
