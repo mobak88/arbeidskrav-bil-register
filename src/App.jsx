@@ -2,6 +2,7 @@ import { useState } from "react";
 import Car from "./components/car/car";
 import CreatePerson from "./components/person/CreatePerson";
 import Login from './components/authorization/Login';
+import Layout from "./components/Layout";
 import Unathorized from "./components/authorization/Unauthorization";
 import RequireAuth from "./components/authorization/RequireAuth";
 import useAxiosFetch from "./hooks/useAxiosFetch";
@@ -22,7 +23,7 @@ function App() {
   return (
       <div className="main">
         <Routes>
-            <Route exact path="/" element = { <App/> } />
+            <Route exact path="/" element = { <Layout/> } />
             <Route path="login" element = { <Login/> } />
             <Route path="unathorized" element={<Unathorized/>} />
 
