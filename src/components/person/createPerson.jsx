@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button} from 'semantic-ui-react';
+import { Link } from "react-router-dom"
 import axios from 'axios';
 
 
@@ -48,7 +49,9 @@ export default function CreatePerson() {
                     placeholder='Your Carbrand' />
                 </Form.Field>
                 <Button type="submit" onClick={sendDataToAPI}>Submit</Button>
-                <Button onClick ={'code to return to start menu'}>Cancel</Button>
+                <Link to ="/">
+                    <Button>Cancel</Button>
+                    </Link>
                 </Form>
         </div>
     )
