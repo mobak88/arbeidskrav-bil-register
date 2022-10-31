@@ -1,12 +1,28 @@
+import useAxiosFetch from '../../hooks/useAxiosFetch';
+import API_ENDPOINTS from '../../api/endpoints';
+
 const Person = () => {
+  const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
+
+  if (data) {
+    console.log(data.persons);
+  }
+
   return (
-    <div>
-      <h3>User information:</h3>
-      <p>Fornavn</p>
-      <p>Etternavn</p>
-      <p>Alder</p>
-      <p>Bilmerke</p>
-    </div>
+    <>
+      {data !== undefined &&
+        data.persons.map((person) => {
+          return (
+            <div key={person.id}>
+              <h3>Information</h3>
+              <p>{person.firstName}</p>
+              <p>{person.lastName}</p>
+              <p>{person.age}</p>
+              <p>{person.carsOwned}</p>
+            </div>
+          );
+        })}
+    </>
   );
 };
 
