@@ -1,25 +1,36 @@
 import { useState } from 'react';
 import Car from './components/car/car';
-import CreatePerson from './components/person/createPerson';
-import Person from './components/person/Person';
+import CreatePerson from './components/person/CreatePerson';
+import Login from './components/authorization/Login';
+import Layout from './components/Layout';
+import Unathorized from './components/authorization/Unauthorization';
+import RequireAuth from './components/authorization/RequireAuth';
 import useAxiosFetch from './hooks/useAxiosFetch';
 import API_ENDPOINTS from './api/endpoints';
+import AuthContext from './context/AuthProvider';
 import { Routes, Route } from 'react-router-dom';
-import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
-function App() {
-  const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
-  if (data) {
-    console.log(data);
-  }
+const ROLES = {
+  User: 2001,
+  Admin: 5151
+};
 
+function App() {
+  const { data, fetchError, isLoading } = useAxiosFetch(
+    `${API_ENDPOINTS.car(20)}`
+  );
+  console.log(data);
   return (
-    <div className='main'>
+    <div className='main-container'>
       <Routes>
-        <Route path='/' element={<Person />} />
-        <Route path='/createUser' element={<CreatePerson />} />
-        <Route path='/login' element={<Login />} />
+        <Route exact path='/' element={<Layout />} />
+        <Route path='login' element={<Login />} />
+        <Route path='unathorized' element={<Unathorized />} />
+
+        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route path='createUser' element={<CreatePerson />} />
+        </Route>
       </Routes>
     </div>
   );
