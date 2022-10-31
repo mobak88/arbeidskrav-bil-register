@@ -10,6 +10,7 @@ const onDelete = (id) => {
 
 const DeletePerson = () => {
   return (
+    <p>Testing</p>
     <input type='button' onClick={onDelete}>
       Delete User
     </input>
