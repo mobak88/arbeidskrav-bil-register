@@ -18,8 +18,8 @@ const ROLES = {
 };
 
 function App() {
-const { data, fetchError, isLoading } = useAxiosFetch(
-  `${API_ENDPOINTS.car(20)}`
+  const { data, fetchError, isLoading } = useAxiosFetch(
+    `${API_ENDPOINTS.car(20)}`
   );
   return (
     <div className='main-container'>
