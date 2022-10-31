@@ -1,14 +1,19 @@
 import axios from 'axios';
 import React from 'react';
+import BASE_URL from './src/api/endpoints';
+
+const onDelete = (id) => {
+  axios.delete(`${BASE_URL}/person/${id}`).then(() => {
+    getData();
+  });
+};
 
 const DeletePerson = () => {
-  const onDelete = (id) => {
-    axios.delete(`${BASE_URL}/person/${id}`).then(() => {
-      getData();
-    });
-  };
-
-  return <div>deletePerson</div>;
+  return (
+    <input type='button' onClick={onDelete}>
+      Delete User
+    </input>
+  );
 };
 
 export default DeletePerson;
