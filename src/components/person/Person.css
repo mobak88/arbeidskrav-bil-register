@@ -1,0 +1,9 @@
+.persons-container {
+  width: 100%;
+}
+
+.person-wrapper {
+  border: 2px solid black;
+  padding: 2rem 1rem;
+  margin: 2rem 1rem;
+}
