@@ -5,6 +5,7 @@ import './Person.css';
 
 const Person = () => {
   const [personInfo, setPersonInfo] = useState({});
+  const [userId, setUserId] = useState(null);
 
   const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
   const firstNameRef = useRef(null);
@@ -13,10 +14,10 @@ const Person = () => {
   const carsOwnedRef = useRef(null);
 
   useEffect(() => {
-    updatePerson();
-    console.log(data.firstName);
-    console.log({ personInfo });
-    console.log(carsOwnedRef.current);
+    if (userId) {
+      console.log(userId);
+      updatePerson(userId);
+    }
   }, [personInfo]);
 
   const getFormValue = () => {
@@ -33,19 +34,19 @@ const Person = () => {
     getFormValue();
   };
 
-  const getUserId = (person) => {
-    console.log(person);
+  const getUserId = (personId) => {
+    setUserId(personId);
   };
 
   const updatePerson = (id) => {
-    fetch(`${API_ENDPOINTS.person}/${id}`, {
+    fetch(`${API_ENDPOINTS.person(id)}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...personInfo
       })
     });
-    
+    console.log(id);
   };
 
   return (
