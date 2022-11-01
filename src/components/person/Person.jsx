@@ -14,6 +14,9 @@ const Person = () => {
 
   useEffect(() => {
     updatePerson();
+    console.log(data.firstName);
+    console.log({ personInfo });
+    console.log(carsOwnedRef.current);
   }, [personInfo]);
 
   const getFormValue = () => {
@@ -30,14 +33,19 @@ const Person = () => {
     getFormValue();
   };
 
-  const updatePerson = () => {
-    fetch('http://194.32.107.29/GaAPI/person/8', {
+  const getUserId = (person) => {
+    console.log(person);
+  };
+
+  const updatePerson = (id) => {
+    fetch(`${API_ENDPOINTS.person}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...personInfo
       })
     });
+    
   };
 
   return (
@@ -47,10 +55,11 @@ const Person = () => {
         <input
           type='text'
           id='first-Name'
+          ref={firstNameRef}
           onChange={(e) => {
             firstNameRef.current = e.target.value;
           }}
-          ref={firstNameRef}
+          required
         />
         <label htmlFor='last-name-input'>Last Name</label>
         <input
@@ -60,6 +69,7 @@ const Person = () => {
           onChange={(e) => {
             lastNameRef.current = e.target.value;
           }}
+          required
         />
         <label htmlFor='age-input'>Age</label>
         <input
@@ -69,6 +79,7 @@ const Person = () => {
           onChange={(e) => {
             ageRef.current = e.target.value;
           }}
+          required
         />
         <label htmlFor='cars-owned'>Cars Owned</label>
         <input
@@ -78,6 +89,7 @@ const Person = () => {
           onChange={(e) => {
             carsOwnedRef.current = e.target.value;
           }}
+          required
         />
         <button onClick={submitPersonForm}>Update</button>
       </form>
@@ -93,7 +105,7 @@ const Person = () => {
                 <p className='cars-owned'>{person?.carsOwned}</p>
               </div>
               <div className='button-wrapper'>
-                <button>Edit</button>
+                <button onClick={() => getUserId(person.id)}>Edit</button>
               </div>
             </div>
           );
