@@ -1,95 +1,95 @@
+/*
 #root {
-    background: #fff;
-    display: flex;
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
+  background: #fff;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
 }
-
-
+*/
 .login-container {
-    display: flex row;
-    justify-content: center;
-    align-items: center;
-    width: 50rem;
-    height: 70%;
-    color: #fff;
-    margin:8rem;
+  display: flex row;
+  justify-content: center;
+  align-items: center;
+  width: 50rem;
+  height: 70%;
+  color: #fff;
+  margin: 8rem;
 }
 
 form {
-    height: 100%;
-    width: 100%;
-    max-width: 35rem;
-    max-height: 30rem;
-    background: white;
-    border-radius: 5px;
-    padding:1rem;
-    color: #681cff;
-    box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px;
+  height: 100%;
+  width: 100%;
+  max-width: 35rem;
+  max-height: 30rem;
+  background: white;
+  border-radius: 5px;
+  padding: 1rem;
+  color: #681cff;
+  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px;
 }
 
 input {
-    font-size: 24px;
-    line-height: 28px;
-    padding: 8px 16px;
-    width: 100%;
-    min-height: 44px;
-    border: unset;
-    border-radius: 4px;
-    outline-color: rgb(84 105 212 / 0.5);
-    background-color: rgb(255, 255, 255);
-    box-shadow:  rgba(60, 66, 87, 0.16) 0px 0px 0px 1px;
-               
+  font-size: 24px;
+  line-height: 28px;
+  padding: 8px 16px;
+  width: 100%;
+  min-height: 44px;
+  border: unset;
+  border-radius: 4px;
+  outline-color: rgb(84 105 212 / 0.5);
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(60, 66, 87, 0.16) 0px 0px 0px 1px;
 }
 
 label {
-    font-size: 24px;
-    font-weight: bold;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .btn {
-    margin: 10px 5px 0 0;
-    padding:0.5rem 1.5rem;
-    font-size:20px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
+  margin: 10px 5px 0 0;
+  padding: 0.5rem 1.5rem;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
 }
 
 .sign-in {
-    background-color: #681cff;
-    color: #fff;
+  background-color: #681cff;
+  color: #fff;
 }
 
 .sign-in:hover {
-    background-color: #570fe8;
+  background-color: #570fe8;
 }
 
 .cancel {
-    background-color: #fff;
-    color: #681cff;
+  background-color: #fff;
+  color: #681cff;
 }
 
 p {
-    color: #681cff;
-    font-size: 20px;
+  color: #681cff;
+  font-size: 20px;
 }
 
 a {
-    color: #681cff;
+  color: #681cff;
 }
 
-a:link, a:visited {
-    color: #681cff;
+a:link,
+a:visited {
+  color: #681cff;
 }
 
 a:hover {
-    color: #2727fa;
+  color: #2727fa;
 }
 
 h1 {
-    color: #681cff;
-    font-size: 36px;
-    margin-bottom: 5px;
+  color: #681cff;
+  font-size: 36px;
+  margin-bottom: 5px;
 }
