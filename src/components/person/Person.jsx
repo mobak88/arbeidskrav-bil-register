@@ -18,7 +18,7 @@ const Person = () => {
       console.log(userId);
       updatePerson(userId);
     }
-  }, [userId]);
+  }, [personInfo]);
 
   const getFormValue = () => {
     setPersonInfo({
@@ -39,13 +39,14 @@ const Person = () => {
   };
 
   const updatePerson = (id) => {
-    fetch(`${API_ENDPOINTS.person}/${id}`, {
+    fetch(`${API_ENDPOINTS.person(id)}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...personInfo
       })
     });
+    console.log(id);
   };
 
   return (
