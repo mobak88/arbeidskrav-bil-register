@@ -1,13 +1,13 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 import "./register.css";
 
 const USER_REG = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REG = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REG_URL = 'register';
+const REG_URL = './register';
 
 const Register = () => {
     const userRef = useRef();
@@ -77,14 +77,6 @@ const Register = () => {
         }
     }
         return (
-            <> {success ? (
-                <section>
-                    <h1> Successful registration</h1>
-                    <p>
-                        <Link from ="/Login">Login now</Link>
-                    </p>
-                </section>
-            ) : (
                 <section className='register-container'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live ="assertive">{errMsg}</p>
                     <h1>Welcome, register here</h1>
@@ -164,8 +156,6 @@ const Register = () => {
                         <Link to="/Login">Sign in here</Link>
                     </p>
                 </section>
-            )}
-        </>
         )
     } 
 

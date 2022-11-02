@@ -5,13 +5,13 @@ import Login from './components/authorization/Login';
 import Layout from './components/Layout';
 import Unathorized from './components/authorization/Unauthorization';
 import RequireAuth from './components/authorization/RequireAuth';
-import useAxiosFetch from './hooks/useAxiosFetch';
-import API_ENDPOINTS from './api/endpoints';
-import AuthContext from './context/AuthProvider';
-import { Routes, Route } from 'react-router-dom';
-import './App.css';
 import Person from './components/person/Person';
 import Register from './components/authorization/Register';
+import Menu from './components/Menu';
+import useAxiosFetch from './hooks/useAxiosFetch';
+import API_ENDPOINTS from './api/endpoints';
+import { Routes, Route } from 'react-router-dom';
+import './App.css';
 
 const ROLES = {
   User: 2001,
@@ -25,6 +25,7 @@ function App() {
         <Route exact path='/' element={<Layout />} />
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
+        <Route path="menu" element={<Menu />} />
         <Route path='unathorized' element={<Unathorized />} />
         <Route exact path='/person' element={<Person />} />
         <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>

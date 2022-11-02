@@ -1,11 +1,15 @@
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
+import "./layout.css";
 
 const Layout = () => {
     return (
         <main className="App">
-        <h1> Hey and welcome</h1>
-        <Link to="login"><button>Log in</button></Link>
+            <div className="layout-container">
+                <h1 className="layout-title"> Hey and welcome</h1>
+                <p className="layout-info">Login to your user here</p>
+                <Link to="login"><button className="layout-btn">Log in</button></Link>
+             </div>
             <Outlet/>
         </main>
     )

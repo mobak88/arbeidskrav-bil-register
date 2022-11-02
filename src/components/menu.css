@@ -1,0 +1,45 @@
+.menu-section {
+    width: 100%;
+    height: 35rem;
+    background-color: #681cff;
+    box-shadow: rgba(60, 66, 87, 0.16) 0px 0px 0px 1px;
+    outline-color: rgb(84 105 212 / 0.5);
+    border: unset;
+}
+
+.link-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+
+h1, p {
+    color:#fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+a {
+    color: #fff;
+}
+
+a:link,
+a:visited {
+  color: #fff;
+}
+
+a:hover {
+  color: #fff;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+     border: none;
+     font-weight: bold;
+     background-color:#fff;
+     color:#681cff;
+}
