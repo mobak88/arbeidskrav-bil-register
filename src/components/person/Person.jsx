@@ -66,6 +66,7 @@ const Person = () => {
       if (res.ok) {
         setPersonInfo({});
       }
+      window.location = '/person';
     } catch (error) {
       console.error(error);
     }
