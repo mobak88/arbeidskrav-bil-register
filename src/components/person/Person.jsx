@@ -9,7 +9,9 @@ const Person = () => {
   const [userId, setUserId] = useState(null);
   const [isEditingPerson, setIsEditingPerson] = useState(false);
   const [personData, setPersonData] = useState({});
+
   const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
+
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const ageRef = useRef(null);
@@ -53,7 +55,7 @@ const Person = () => {
     }
   }, [userId]);
 
-  const getUserId = (personId) => {
+  const updatePersonHandler = (personId) => {
     setUserId(personId);
     setIsEditingPerson((prevState) => !prevState);
   };
@@ -65,6 +67,18 @@ const Person = () => {
       });
       if (res.ok) {
         setPersonInfo({});
+      }
+      window.location = '/person';
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deletePerson = async (id) => {
+    try {
+      const res = await axios.delete(`${API_ENDPOINTS.person(id)}`);
+      if (res.ok) {
+        console.log('Deleted');
       }
       window.location = '/person';
     } catch (error) {
@@ -131,7 +145,12 @@ const Person = () => {
                 <p className='cars-owned'>{person?.carsOwned}</p>
               </div>
               <div className='button-wrapper'>
-                <button onClick={() => getUserId(person.id)}>Edit</button>
+                <button onClick={() => updatePersonHandler(person.id)}>
+                  Edit
+                </button>
+              </div>
+              <div className='button-wrapper'>
+                <button onClick={() => deletePerson(person.id)}>Delete</button>
               </div>
             </div>
           );
