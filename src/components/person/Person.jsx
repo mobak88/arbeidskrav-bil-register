@@ -5,9 +5,10 @@ import API_ENDPOINTS from '../../api/endpoints';
 import './Person.css';
 
 const Person = () => {
-  const [personInfo, setPersonInfo] = useState({});
+  const [personFormValue, setPersonFormValue] = useState({});
   const [userId, setUserId] = useState(null);
   const [isEditingPerson, setIsEditingPerson] = useState(false);
+  const [personData, setPersonData] = useState({});
   const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -16,26 +17,25 @@ const Person = () => {
 
   useEffect(() => {
     if (userId) {
-      console.log(userId);
       updatePerson(userId);
     }
-  }, [personInfo]);
+  }, [personFormValue]);
 
   const getFormValue = () => {
-    const { persons } = data;
-    const [person] = persons.filter((user) => user.id === userId);
-    setPersonInfo({
+    setPersonFormValue({
       firstName:
         firstNameRef.current.length > 0
           ? firstNameRef.current
-          : person.firstName,
+          : personData.firstName,
       lastName:
-        lastNameRef.current.length > 0 ? lastNameRef.current : person.lastName,
-      age: ageRef.current.length > 0 ? ageRef.current : person.age,
+        lastNameRef.current.length > 0
+          ? lastNameRef.current
+          : personData.lastName,
+      age: ageRef.current.length > 0 ? ageRef.current : personData.age,
       carsOwned:
         carsOwnedRef.current.length > 0
           ? carsOwnedRef.current
-          : person.carsOwned
+          : personData.carsOwned
     });
   };
 
@@ -45,6 +45,14 @@ const Person = () => {
     setIsEditingPerson((prevState) => !prevState);
   };
 
+  useEffect(() => {
+    if (data?.persons) {
+      const { persons } = data;
+      const [person] = persons.filter((user) => user.id === userId);
+      setPersonData(person);
+    }
+  }, [userId]);
+
   const getUserId = (personId) => {
     setUserId(personId);
     setIsEditingPerson((prevState) => !prevState);
@@ -53,7 +61,7 @@ const Person = () => {
   const updatePerson = async (id) => {
     try {
       const res = await axios.put(`${API_ENDPOINTS.person(id)}`, {
-        ...personInfo
+        ...personFormValue
       });
       if (res.ok) {
         setPersonInfo({});
@@ -72,40 +80,40 @@ const Person = () => {
             type='text'
             id='first-Name'
             ref={firstNameRef}
+            defaultValue={personData?.firstName || ''}
             onChange={(e) => {
               firstNameRef.current = e.target.value;
             }}
-            required
           />
           <label htmlFor='last-name-input'>Last Name</label>
           <input
             type='text'
             id='last-name'
             ref={lastNameRef}
+            defaultValue={personData?.lastName || ''}
             onChange={(e) => {
               lastNameRef.current = e.target.value;
             }}
-            required
           />
           <label htmlFor='age-input'>Age</label>
           <input
             type='number'
             id='age'
             ref={ageRef}
+            defaultValue={personData?.age || ''}
             onChange={(e) => {
               ageRef.current = e.target.value;
             }}
-            required
           />
           <label htmlFor='cars-owned'>Cars Owned</label>
           <input
             type='text'
             id='cars-owned'
             ref={carsOwnedRef}
+            defaultValue={personData?.carsOwned || ''}
             onChange={(e) => {
               carsOwnedRef.current = e.target.value;
             }}
-            required
           />
           <button onClick={submitPersonForm}>Update</button>
         </form>
