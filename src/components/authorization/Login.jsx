@@ -4,7 +4,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import "./Login.css";
 
-const LOGIN_URL = '/auth';
+
+
+const LOGIN_URL = '/login';
 
 const Login = () => {
     const { setAuth } = useAuth();
@@ -16,6 +18,7 @@ const Login = () => {
 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
+    const [success, setSuccess] = useState(false)
     const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
@@ -39,6 +42,7 @@ const Login = () => {
             setAuth({user, password, roles, accessToken});
             setUser('');
             setPassword('')
+            setSuccess(true);
             navigate(from, { replace: true});
         } catch (err) {
             if(!err?.response){
@@ -54,6 +58,16 @@ const Login = () => {
         }
     }
         return (
+            <> 
+            {success? (
+                <section>
+                <h1> You are logged in!</h1>
+                <br />
+                <p>
+                    <Link to="/createPerson">Go to homepage</Link>
+                </p>
+                </section>
+            ): (
         <section className='login-container'>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign In</h1>
@@ -70,7 +84,7 @@ const Login = () => {
             
                 
                     <label name="password">Password:</label>
-                    <input type="text"
+                    <input type="password"
                      id="password"  
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
@@ -84,6 +98,8 @@ const Login = () => {
                 <Link to="/register"> Sign up</Link>
             </p>
         </section>
+            )}
+        </>
         )
 }
 

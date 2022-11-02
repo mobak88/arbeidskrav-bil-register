@@ -11,6 +11,7 @@ import AuthContext from './context/AuthProvider';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Person from './components/person/Person';
+import Register from './components/authorization/Register';
 
 const ROLES = {
   User: 2001,
@@ -22,6 +23,7 @@ function App() {
     <div className='main-container'>
       <Routes>
         <Route exact path='/' element={<Layout />} />
+        <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
         <Route path='unathorized' element={<Unathorized />} />
         <Route exact path='/person' element={<Person />} />
