@@ -79,7 +79,7 @@ const Register = () => {
         return (
                 <section className='register-container'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live ="assertive">{errMsg}</p>
-                    <h1>Welcome, register here</h1>
+                    <h1 className='register-title'>Welcome, register here</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor='username'>
                             Username:
