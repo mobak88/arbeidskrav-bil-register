@@ -1,16 +1,16 @@
 # [Abreidskrav Bil-Register](https://gokstadakademiet.itslearning.com/ContentArea/ContentArea.aspx?LocationID=37&LocationType=1&ElementID=11696)
 
-Bil-Register is an app where you can view a list of registered persons, and what cars they own.
+Bil-Register is an app where you can view a list of registered persons, and what cars they own.\
 With administrator permissions you can create, read, update and delete from the database using forms.
 
 ### Start server
 
-Start vite dev server.
+Start vite dev server.\
 `npm start`
 
 ### Build
 
-Build production for deployment.
+Build production for deployment.\
 `npm run build`
 
 ## Group members
