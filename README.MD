@@ -1,4 +1,4 @@
-# [Abreidskrav Bil-Register](https://assignment.itslearning.com/Annotations/AnnotationApp.aspx?AnnotationAccessArea=1&AnnotationOfUserId=0&IsReadOnly=True&LearningObjectId=333318106&LearningObjectInstanceId=472194842&MobileBrowser=NotDefined&SourceUniqueId=86253214-491c-42c7-8862-6f1cd6488de7&UserId=150075766&ViewUniqueId=86253214-491c-42c7-8862-6f1cd6488de7)
+# [Abreidskrav Bil-Register](https://gokstadakademiet.itslearning.com/ContentArea/ContentArea.aspx?LocationID=37&LocationType=1&ElementID=11910)
 
 Bil-Register is an app where you can view a list of registered persons, and what cars they own.\
 With administrator permissions you can create, read, update and delete from the database using forms.
