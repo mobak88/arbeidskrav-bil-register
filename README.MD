@@ -15,10 +15,10 @@ Build production for deployment.
 
 ## Group members
 
-[Mustafa Baker](https://github.com/mobak88)
-[Morten Løkkemoen](https://github.com/mortenlokkemoen)
-[André Lindgård](https://github.com/Lindgard)
-[Herman Novak](https://github.com/hernok)
+[Mustafa Baker](https://github.com/mobak88)\
+[Morten Løkkemoen](https://github.com/mortenlokkemoen)\
+[André Lindgård](https://github.com/Lindgard)\
+[Herman Novak](https://github.com/hernok)\
 
 ## API Documentation
 
