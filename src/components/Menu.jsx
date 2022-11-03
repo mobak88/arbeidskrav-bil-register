@@ -11,6 +11,9 @@ const Menu = () => {
         <Link to='/person'>
           <button className='btn'>Users</button>
         </Link>
+        <Link to='/car'>
+          <button className='btn'>Cars</button>
+        </Link>
         <Link to='/createUser'>
           <button className='btn'>Create new user</button>
         </Link>

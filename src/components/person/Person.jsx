@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
-import axios from 'axios';
 import API_ENDPOINTS from '../../api/endpoints';
-import EditPerson from './editPerson';
-import { PersonCtx } from '../../contexts/personCtx';
+import EditPerson from './EditPerson';
+import PersonCtx from '../../contexts/personCtx';
+import { deleteFromAPI, updateToAPI } from '../../helpers/httpReuqests';
 import './Person.css';
 
 const Person = () => {
@@ -23,8 +23,20 @@ const Person = () => {
   }, [data]);
 
   useEffect(() => {
-    if (userId) {
-      updatePerson(userId);
+    if (userId && Object.keys(personFormValue).length !== 0) {
+      updateToAPI(personFormValue, `${API_ENDPOINTS.person(userId)}`);
+
+      setAllPersonsData((prevState) => {
+        const newState = prevState.map((person) => {
+          if (person.id === userId) {
+            return { ...personFormValue, id: userId };
+          }
+          return person;
+        });
+        return [...newState];
+      });
+
+      setPersonData({});
     }
   }, [personFormValue]);
 
@@ -32,48 +44,27 @@ const Person = () => {
     if (data?.persons) {
       const { persons } = data;
       const [person] = persons.filter((user) => user.id === userId);
-      setPersonData(person);
+      setPersonData({ ...person });
     }
   }, [userId]);
 
   const updatePersonHandler = (personId) => {
+    if (!isEditingPerson) {
+      setIsEditingPerson((prevState) => !prevState);
+    }
     setUserId(personId);
-    setIsEditingPerson((prevState) => !prevState);
+    console.log(personId);
+    const { persons } = data;
+    const [person] = persons.filter((user) => user.id === userId);
+    setPersonData({ ...person });
   };
 
-  const updatePerson = async (id) => {
-    try {
-      const res = await axios.put(`${API_ENDPOINTS.person(id)}`, {
-        ...personFormValue
-      });
-
-      setAllPersonsData((prevState) => {
-        const newState = prevState.map((person) => {
-          if (person.id === id) {
-            return { ...personFormValue, id: id };
-          }
-          return person;
-        });
-        return [...newState];
-      });
-
-      if (res.ok) {
-        personData({});
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const deletePerson = async (id) => {
-    try {
-      await axios.delete(`${API_ENDPOINTS.person(id)}`);
-      setAllPersonsData((prevState) =>
-        prevState.filter((person) => person.id !== id)
-      );
-    } catch (error) {
-      console.error(error);
-    }
+  const deletePersonHandler = (id) => {
+    deleteFromAPI(`${API_ENDPOINTS.person(id)}`);
+    setAllPersonsData((prevState) =>
+      prevState.filter((person) => person.id !== id)
+    );
+    if (isEditingPerson) setIsEditingPerson((prevState) => !prevState);
   };
 
   return (
@@ -88,7 +79,6 @@ const Person = () => {
       <div className='persons-container'>
         {isLoading && 'Loading...'}
         {fetchError && `Error: ${fetchError}`}
-        {isEditingPerson && <EditPerson personData={personData} />}
         {isEditingPerson && <EditPerson personData={personData} />}
         {allPersonsData &&
           allPersonsData.map((person) => {
@@ -108,7 +98,7 @@ const Person = () => {
                   </button>
                 </div>
                 <div className='button-wrapper'>
-                  <button onClick={() => deletePerson(person.id)}>
+                  <button onClick={() => deletePersonHandler(person.id)}>
                     Delete
                   </button>
                 </div>
