@@ -9,6 +9,7 @@ const Person = () => {
   const [userId, setUserId] = useState(null);
   const [isEditingPerson, setIsEditingPerson] = useState(false);
   const [personData, setPersonData] = useState({});
+  const [allPersonsData, setAllPersonsData] = useState([]);
 
   const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
 
@@ -18,15 +19,25 @@ const Person = () => {
   const carsOwnedRef = useRef(null);
 
   useEffect(() => {
-    if (isEditingPerson === true) {
+    if (data.persons) {
+      const { persons } = data;
+      setAllPersonsData([...persons]);
     }
-  }, [isEditingPerson]);
+  }, [data]);
 
   useEffect(() => {
     if (userId) {
       updatePerson(userId);
     }
   }, [personFormValue]);
+
+  useEffect(() => {
+    if (data?.persons) {
+      const { persons } = data;
+      const [person] = persons.filter((user) => user.id === userId);
+      setPersonData(person);
+    }
+  }, [userId]);
 
   const getFormValue = () => {
     setPersonFormValue({
@@ -52,14 +63,6 @@ const Person = () => {
     setIsEditingPerson((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    if (data?.persons) {
-      const { persons } = data;
-      const [person] = persons.filter((user) => user.id === userId);
-      setPersonData(person);
-    }
-  }, [userId]);
-
   const updatePersonHandler = (personId) => {
     setUserId(personId);
     setIsEditingPerson((prevState) => !prevState);
@@ -70,10 +73,24 @@ const Person = () => {
       const res = await axios.put(`${API_ENDPOINTS.person(id)}`, {
         ...personFormValue
       });
+      setAllPersonsData((prevState) =>
+        prevState.filter((person) => {
+          if (person.id === id) {
+            person = {
+              ...personFormValue
+            };
+          }
+        })
+      );
+      allPersonsData.filter((person) => {
+        if (person.id === id) {
+          console.log(person);
+        }
+      });
+      console.log(personFormValue);
       if (res.ok) {
-        setPersonInfo({});
+        personData({});
       }
-      window.location = '/person';
     } catch (error) {
       console.error(error);
     }
@@ -81,11 +98,10 @@ const Person = () => {
 
   const deletePerson = async (id) => {
     try {
-      const res = await axios.delete(`${API_ENDPOINTS.person(id)}`);
-      if (res.ok) {
-        console.log('Deleted');
-      }
-      window.location = '/person';
+      await axios.delete(`${API_ENDPOINTS.person(id)}`);
+      setAllPersonsData((prevState) =>
+        prevState.filter((person) => person.id !== id)
+      );
     } catch (error) {
       console.error(error);
     }
@@ -138,8 +154,8 @@ const Person = () => {
           <button onClick={submitPersonForm}>Update</button>
         </form>
       )}
-      {data &&
-        data.persons?.map((person) => {
+      {allPersonsData &&
+        allPersonsData.map((person) => {
           return (
             <div className='person-container' key={person.id}>
               <div className='information-wrapper'>
@@ -166,5 +182,3 @@ const Person = () => {
 };
 
 export default Person;
-
-//<p className='last-name'>Last name: {person?.lastName}</p>
