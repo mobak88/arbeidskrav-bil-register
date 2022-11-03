@@ -10,10 +10,6 @@ const EditPerson = ({ personData }) => {
   const ageRef = useRef(null);
   const carsOwnedRef = useRef(null);
 
-  useEffect(() => {
-    console.log(personData);
-  }, [personData]);
-
   const submitPersonForm = (e) => {
     e.preventDefault();
     getFormValue();
