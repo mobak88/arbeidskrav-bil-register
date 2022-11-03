@@ -18,7 +18,7 @@ Build production for deployment.
 [Mustafa Baker](https://github.com/mobak88)\
 [Morten Løkkemoen](https://github.com/mortenlokkemoen)\
 [André Lindgård](https://github.com/Lindgard)\
-[Herman Novak](https://github.com/hernok)\
+[Herman Novak](https://github.com/hernok)
 
 ## API Documentation
 
