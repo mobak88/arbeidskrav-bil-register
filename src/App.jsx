@@ -9,17 +9,17 @@ import Menu from './components/Menu';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
-
-
 function App() {
   return (
     <div className='main-container'>
+      <Menu />
       <Routes>
         <Route exact path='/' element={<Layout />} />
         <Route path='login' element={<Login />} />
         <Route path='menu' element={<Menu />} />
         <Route path='unathorized' element={<Unathorized />} />
         <Route exact path='/person' element={<Person />} />
+        <Route exact path='/car' element={<Car />} />
         <Route path='createUser' element={<CreatePerson />} />
       </Routes>
     </div>
