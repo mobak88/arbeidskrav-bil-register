@@ -17,11 +17,10 @@ const Person = () => {
   const ageRef = useRef(null);
   const carsOwnedRef = useRef(null);
 
-  useEffect(() =>{
-    if(isEditingPerson === true){
-      
+  useEffect(() => {
+    if (isEditingPerson === true) {
     }
-  },[isEditingPerson])
+  }, [isEditingPerson]);
 
   useEffect(() => {
     if (userId) {
@@ -145,10 +144,11 @@ const Person = () => {
             <div className='person-container' key={person.id}>
               <div className='information-wrapper'>
                 <h3>Information</h3>
-                <p className='first-name'>{person?.firstName}</p>
-                <p className='last-name'>{person?.lastName}</p>
-                <p className='age'>{person?.age}</p>
-                <p className='cars-owned'>{person?.carsOwned}</p>
+                <p className='first-name'>
+                  Name: {person?.firstName} {person?.lastName}
+                </p>
+                <p className='age'>Age: {person?.age}</p>
+                <p className='cars-owned'>Cars owned: {person?.carsOwned}</p>
               </div>
               <div className='button-wrapper'>
                 <button onClick={() => updatePersonHandler(person.id)}>
@@ -166,3 +166,5 @@ const Person = () => {
 };
 
 export default Person;
+
+//<p className='last-name'>Last name: {person?.lastName}</p>
