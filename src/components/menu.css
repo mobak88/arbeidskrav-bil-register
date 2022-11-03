@@ -33,10 +33,11 @@ a:hover {
   color: #fff;
 }
 
-.btn {
+.menu-btn {
     padding: 1rem 2rem;
     font-size: 20px;
     border-radius: 10px;
+    margin:0 10px;
     cursor: pointer;
      border: none;
      font-weight: bold;

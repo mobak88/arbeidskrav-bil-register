@@ -1,61 +1,64 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import {React,  useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
+
 
 
 const Login = () => {
-
 const navigate = useNavigate();
-const [values, setValues] = useState({
-	username: "",
-	pass: "",
-	showPass: false,
-});
+
+const newUsername = "admin";
+const newPassword = "admin";
+const [username, setUsername] = useState('');
+const [password, setPassword] = useState('');
+
+
 
 const handleSubmit = (e) => {
 	e.preventDefault();
-	axios.post('/menu', {
-			username: values.username,
-			password: values.pass,
-		})
-		.then((res) => {
-			localStorage.setItem("token", res.data.token);
-            navigate("/menu")
-		})
-		.catch((err) => console.error(err));
-};
-
+	
+	try {
+		if(username === newUsername || password === newPassword ){
+			navigate("/menu")
+		}
+	}catch (err) {
+		if(!username === newUsername || !password === newPassword){
+			console.log("Wrong password or username");
+		} else {
+			console.log("error")
+		}
+	}
+}	
 	return (
-		
-<section className="login-container">
+    
+                <section className="login-container">
+                    <h1 className="signin-title">Sign In</h1>
+                    <form className="login-form" onSubmit={handleSubmit}>
+                        <label classname="label-deco" htmlFor="username">Username:</label>
+                        <input
+							className="input-decoration"
+                            type="text"
+                            id="username"
+                            autoComplete="off"
+                            onChange={(e) => setUsername(e.target.value)}
+                            value={username}
+                            required
+                        />
 
+                        <label classname="label-deco" htmlFor="password">Password:</label>
+                        <input
+							className="input-decoration"
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                            required
+                        />
+                        <button className="btn">Sign In</button>
+						<Link className="login-link" to ="/">Return</Link>
+                    </form>
+            
+                </section>
+            )}
 
-<form onSubmit={handleSubmit}>
-        <label> Username</label>
-		<input
-			type="username"
-			label="Enter your username"
-			placeholder="username"
-			required
-			onChange={(e) => setValues({ ...values, username: e.target.value })}
-		/>
-    <label>Password</label>
-	<input
-		type={values.showPass ? "text" : "password"}
-		label="Password"
-		placeholder="Password"
-		required
-		onChange={(e) => setValues({ ...values, pass: e.target.value })}
-
-	/>
-	<button className="btn">
-		Sign In
-	</button>
-    </form>
-
-</section>
-		
-	);
-};
-
-export default Login;
+export default Login
