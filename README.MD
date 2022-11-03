@@ -1,25 +1,24 @@
-# Abreidskrav Bil-Register
+# [Abreidskrav Bil-Register](https://gokstadakademiet.itslearning.com/ContentArea/ContentArea.aspx?LocationID=37&LocationType=1&ElementID=11696)
 
-Bil-Register is an app where you can
-With administrator permissions you can create, read, update and delete
+Bil-Register is an app where you can view a list of registered persons, and what cars they own.
+With administrator permissions you can create, read, update and delete from the database using forms.
 
-### start
+### Start server
 
 Start vite dev server.
-`npm run start`
+`npm start`
 
-# or
-
-`yarn start`
-
-### build
+### Build
 
 Build production for deployment.
 `npm run build`
 
-# or
+## Group members
 
-`yarn build`
+[Mustafa Baker](https://github.com/mobak88)
+[Morten Løkkemoen](https://github.com/mortenlokkemoen)
+[André Lindgård](https://github.com/Lindgard)
+[Herman Novak](https://github.com/hernok)
 
 ## API Documentation
 
