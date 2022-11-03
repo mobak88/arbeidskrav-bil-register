@@ -86,6 +86,9 @@ const Person = () => {
       }}
     >
       <div className='persons-container'>
+        {isLoading && 'Loading...'}
+        {fetchError && `Error: ${fetchError}`}
+        {isEditingPerson && <EditPerson personData={personData} />}
         {isEditingPerson && <EditPerson personData={personData} />}
         {allPersonsData &&
           allPersonsData.map((person) => {
