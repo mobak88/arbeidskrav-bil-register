@@ -18,11 +18,11 @@ const handleSubmit = (e) => {
 	e.preventDefault();
 	
 	try {
-		if(username === newUsername || password === newPassword ){
+		if(username === newUsername && password === newPassword ){
 			navigate("/menu")
 		}
 	}catch (err) {
-		if(!username === newUsername || !password === newPassword){
+		if(!username === newUsername && !password === newPassword){
 			console.log("Wrong password or username");
 		} else {
 			console.log("error")
