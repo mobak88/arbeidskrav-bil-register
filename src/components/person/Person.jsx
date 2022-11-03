@@ -15,6 +15,12 @@ const Person = () => {
   const ageRef = useRef(null);
   const carsOwnedRef = useRef(null);
 
+  useEffect(() =>{
+    if(isEditingPerson === true){
+      
+    }
+  },[isEditingPerson])
+
   useEffect(() => {
     if (userId) {
       updatePerson(userId);
