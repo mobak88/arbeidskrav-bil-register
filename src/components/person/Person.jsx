@@ -9,17 +9,35 @@ const Person = () => {
   const [userId, setUserId] = useState(null);
   const [isEditingPerson, setIsEditingPerson] = useState(false);
   const [personData, setPersonData] = useState({});
+  const [allPersonsData, setAllPersonsData] = useState([]);
+
   const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
+
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const ageRef = useRef(null);
   const carsOwnedRef = useRef(null);
 
   useEffect(() => {
+    if (data.persons) {
+      const { persons } = data;
+      setAllPersonsData([...persons]);
+    }
+  }, [data]);
+
+  useEffect(() => {
     if (userId) {
       updatePerson(userId);
     }
   }, [personFormValue]);
+
+  useEffect(() => {
+    if (data?.persons) {
+      const { persons } = data;
+      const [person] = persons.filter((user) => user.id === userId);
+      setPersonData(person);
+    }
+  }, [userId]);
 
   const getFormValue = () => {
     setPersonFormValue({
@@ -45,15 +63,7 @@ const Person = () => {
     setIsEditingPerson((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    if (data?.persons) {
-      const { persons } = data;
-      const [person] = persons.filter((user) => user.id === userId);
-      setPersonData(person);
-    }
-  }, [userId]);
-
-  const getUserId = (personId) => {
+  const updatePersonHandler = (personId) => {
     setUserId(personId);
     setIsEditingPerson((prevState) => !prevState);
   };
@@ -63,10 +73,31 @@ const Person = () => {
       const res = await axios.put(`${API_ENDPOINTS.person(id)}`, {
         ...personFormValue
       });
+
+      setAllPersonsData((prevState) => {
+        const newState = prevState.map((person) => {
+          if (person.id === id) {
+            return { ...personFormValue, id: id };
+          }
+          return person;
+        });
+        return [...newState];
+      });
+
       if (res.ok) {
-        setPersonInfo({});
+        personData({});
       }
-      window.location = '/person';
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deletePerson = async (id) => {
+    try {
+      await axios.delete(`${API_ENDPOINTS.person(id)}`);
+      setAllPersonsData((prevState) =>
+        prevState.filter((person) => person.id !== id)
+      );
     } catch (error) {
       console.error(error);
     }
@@ -119,19 +150,25 @@ const Person = () => {
           <button onClick={submitPersonForm}>Update</button>
         </form>
       )}
-      {data &&
-        data.persons?.map((person) => {
+      {allPersonsData &&
+        allPersonsData.map((person) => {
           return (
             <div className='person-container' key={person.id}>
               <div className='information-wrapper'>
                 <h3>Information</h3>
-                <p className='first-name'>{person?.firstName}</p>
-                <p className='last-name'>{person?.lastName}</p>
-                <p className='age'>{person?.age}</p>
-                <p className='cars-owned'>{person?.carsOwned}</p>
+                <p className='first-name'>
+                  Name: {person?.firstName} {person?.lastName}
+                </p>
+                <p className='age'>Age: {person?.age}</p>
+                <p className='cars-owned'>Cars owned: {person?.carsOwned}</p>
               </div>
               <div className='button-wrapper'>
-                <button className='person-btn' onClick={() => getUserId(person.id)}>Edit</button>
+                <button onClick={() => updatePersonHandler(person.id)}>
+                  Edit
+                </button>
+              </div>
+              <div className='button-wrapper'>
+                <button onClick={() => deletePerson(person.id)}>Delete</button>
               </div>
             </div>
           );

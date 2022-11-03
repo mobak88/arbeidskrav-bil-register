@@ -17,10 +17,9 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Layout />} />
         <Route path='login' element={<Login />} />
-        <Route path='register' element={<Register />} />
-        <Route path="menu" element={<Menu />} />
+        <Route path='menu' element={<Menu />} />
         <Route path='unathorized' element={<Unathorized />} />
-        <Route exact path='/person' element={<Person />} />     
+        <Route exact path='/person' element={<Person />} />
         <Route path='createUser' element={<CreatePerson />} />
       </Routes>
     </div>

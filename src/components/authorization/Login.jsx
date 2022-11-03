@@ -1,98 +1,61 @@
-import { useRef, useState, useEffect} from 'react';
-import useAuth from '../../hooks/useAuth';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import "./Login.css";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-
-
-const LOGIN_URL = 'http://localhost:3000/Login';
 
 const Login = () => {
-    const { setAuth } = useAuth();
-    const navigate = useNavigate();
-    const location = useLocation ();
-    const from = location.state?.from?.pathname || "/Login";
-    const userRef = useRef();
-    const errRef = useRef();
 
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
-    const [success, setSuccess] = useState(false)
-    const [errMsg, setErrMsg] = useState('');
+const navigate = useNavigate();
+const [values, setValues] = useState({
+	username: "",
+	pass: "",
+	showPass: false,
+});
 
-    useEffect(() => {
-        userRef.current.focus();
-    },[]);
+const handleSubmit = (e) => {
+	e.preventDefault();
+	axios.post('/menu', {
+			username: values.username,
+			password: values.pass,
+		})
+		.then((res) => {
+			localStorage.setItem("token", res.data.token);
+            navigate("/menu")
+		})
+		.catch((err) => console.error(err));
+};
 
-    useEffect(() => {
-        setErrMsg('')
-    },[user, password])
+	return (
+		
+<section className="login-container">
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, password }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            );
-            const roles = response?.data?.roles;
-            setAuth({user, password, roles, accessToken});
-            setUser('');
-            setPassword('')
-            setSuccess(true);
-            navigate(from, { replace: true});
-    
-        } catch (err) {
-            if(user === "admin" && password === "admin"){
-                setSuccess(true);
-            }
-            if(!err?.response){
-                setErrMsg('No response from Server');
-            } else if(err.response?.status === 400){
-                setErrMsg('Missing Username or Password');
-            } else if(err.response?.status === 401){
-                setErrMsg('Unathorized access');
-            } else {
-                setErrMsg('Login failed');
-            }
-                errRef.current.focus();
-        }
-    }
-        return (
-        <section className='login-container'>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1 className='signin-title'>Sign In</h1>
-            <form>
 
-                    <label name="username">Username:</label>
-                    <input type="text"
-                     id="username" 
-                     ref={userRef} autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
-                    required
-                    />
-            
-                
-                    <label name="password">Password:</label>
-                    <input type="password"
-                     id="password"  
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    required
-                    />
-                <button className='btn sign-in' onClick={handleSubmit}> Sign In</button>
-                <Link to = "/"><button className='btn cancel'>Cancel</button></Link>
-            </form>
-            <p> Not registred yet?
-                <br />
-                <Link to="/register"> Sign up</Link>
-            </p>
-        </section>
-        )    
-    }
+<form onSubmit={handleSubmit}>
+        <label> Username</label>
+		<input
+			type="username"
+			label="Enter your username"
+			placeholder="username"
+			required
+			onChange={(e) => setValues({ ...values, username: e.target.value })}
+		/>
+    <label>Password</label>
+	<input
+		type={values.showPass ? "text" : "password"}
+		label="Password"
+		placeholder="Password"
+		required
+		onChange={(e) => setValues({ ...values, pass: e.target.value })}
+
+	/>
+	<button className="btn">
+		Sign In
+	</button>
+    </form>
+
+</section>
+		
+	);
+};
 
 export default Login;
