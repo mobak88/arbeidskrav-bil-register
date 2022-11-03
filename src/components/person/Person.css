@@ -22,9 +22,7 @@
 }
 
 .first-name,
-.last-name,
 .age,
 .cars-owned {
   color: black;
-  
 }
