@@ -10,6 +10,7 @@
   padding: 1rem;
   margin: 1rem;
   min-width: 18rem;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,4 +19,12 @@
 
 .information-wrapper {
   text-align: center;
+}
+
+.first-name,
+.last-name,
+.age,
+.cars-owned {
+  color: black;
+  
 }
