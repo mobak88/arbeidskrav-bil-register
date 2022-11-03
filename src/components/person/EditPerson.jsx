@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import { PersonCtx } from '../../contexts/personCtx';
+import { useRef, useContext } from 'react';
+import PersonCtx from '../../contexts/personCtx';
 import './Person.css';
 
 const EditPerson = ({ personData }) => {
@@ -32,52 +32,65 @@ const EditPerson = ({ personData }) => {
           ? carsOwnedRef.current
           : personData.carsOwned
     });
-    console.log('click');
+  };
+
+  const cancelUpdate = (e) => {
+    e.preventDefault();
+    personCtx.setIsEditingPerson((prevState) => !prevState);
   };
 
   return (
-    <form action=''>
-      <label htmlFor='first-name'>First Name</label>
-      <input
-        type='text'
-        id='first-Name'
-        ref={firstNameRef}
-        defaultValue={personData?.firstName || ''}
-        onChange={(e) => {
-          firstNameRef.current = e.target.value;
-        }}
-      />
-      <label htmlFor='last-name-input'>Last Name</label>
-      <input
-        type='text'
-        id='last-name'
-        ref={lastNameRef}
-        defaultValue={personData?.lastName || ''}
-        onChange={(e) => {
-          lastNameRef.current = e.target.value;
-        }}
-      />
-      <label htmlFor='age-input'>Age</label>
-      <input
-        type='number'
-        id='age'
-        ref={ageRef}
-        defaultValue={personData?.age || ''}
-        onChange={(e) => {
-          ageRef.current = e.target.value;
-        }}
-      />
-      <label htmlFor='cars-owned'>Cars Owned</label>
-      <input
-        type='text'
-        id='cars-owned'
-        ref={carsOwnedRef}
-        defaultValue={personData?.carsOwned || ''}
-        onChange={(e) => {
-          carsOwnedRef.current = e.target.value;
-        }}
-      />
+    <form className='edit-person-form' action=''>
+      <div className='form-input-container'>
+        <label htmlFor='first-name'>First Name:</label>
+        <input
+          type='text'
+          id='first-Name'
+          ref={firstNameRef}
+          defaultValue={personData?.firstName || ''}
+          onChange={(e) => {
+            firstNameRef.current = e.target.value;
+          }}
+        />
+      </div>
+      <div className='form-input-container'>
+        <label htmlFor='last-name-input'>Last Name:</label>
+        <input
+          type='text'
+          id='last-name'
+          ref={lastNameRef}
+          defaultValue={personData?.lastName || ''}
+          onChange={(e) => {
+            lastNameRef.current = e.target.value;
+          }}
+        />
+      </div>
+      <div className='form-input-container'>
+        <label htmlFor='age-input'>Age:</label>
+        <input
+          type='number'
+          id='age'
+          ref={ageRef}
+          defaultValue={personData?.age || ''}
+          onChange={(e) => {
+            ageRef.current = e.target.value;
+          }}
+        />
+      </div>
+      <div className='form-input-container'>
+        <label htmlFor='cars-owned'>Cars Owned:</label>
+        <input
+          type='text'
+          id='cars-owned'
+          ref={carsOwnedRef}
+          defaultValue={personData?.carsOwned || ''}
+          onChange={(e) => {
+            carsOwnedRef.current = e.target.value;
+          }}
+        />
+      </div>
       <button onClick={submitPersonForm}>Update</button>
+      <button onClick={cancelUpdate}>Cancel</button>
     </form>
   );
 };

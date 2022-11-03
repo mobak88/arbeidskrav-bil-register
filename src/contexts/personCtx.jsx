@@ -1,3 +1,5 @@
 import { createContext } from 'react';
 
-export const PersonCtx = createContext(null);
+const PersonCtx = createContext(null);
+
+export default PersonCtx;

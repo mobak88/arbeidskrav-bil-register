@@ -1,4 +1,4 @@
-import Car from './components/car/car';
+import Car from './components/car/Car';
 import CreatePerson from './components/person/CreatePerson';
 import Login from './components/authorization/Login';
 import Layout from './components/Layout';
