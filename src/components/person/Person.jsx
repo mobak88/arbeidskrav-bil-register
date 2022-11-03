@@ -73,21 +73,17 @@ const Person = () => {
       const res = await axios.put(`${API_ENDPOINTS.person(id)}`, {
         ...personFormValue
       });
-      setAllPersonsData((prevState) =>
-        prevState.filter((person) => {
+
+      setAllPersonsData((prevState) => {
+        const newState = prevState.map((person) => {
           if (person.id === id) {
-            person = {
-              ...personFormValue
-            };
+            return { ...personFormValue, id: id };
           }
-        })
-      );
-      allPersonsData.filter((person) => {
-        if (person.id === id) {
-          console.log(person);
-        }
+          return person;
+        });
+        return [...newState];
       });
-      console.log(personFormValue);
+
       if (res.ok) {
         personData({});
       }
