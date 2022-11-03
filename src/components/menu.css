@@ -14,7 +14,7 @@
 }
 
 
-h1, p {
+.menu-title, .menu-info {
     color:#fff;
     text-align: center;
     padding: 1rem;
