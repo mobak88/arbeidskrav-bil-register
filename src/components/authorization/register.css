@@ -39,13 +39,19 @@
     font-weight: bold;
   }
   
-  button {
+  .signin-btn {
     margin: 10px 5px 0 0;
     padding: 0.5rem 1.5rem;
     font-size: 20px;
     border-radius: 5px;
     cursor: pointer;
     border: none;
+    background-color: #681cff;
+    color: #fff;
+  }
+
+  .signin-btn:hover {
+    background-color: #5618d1;
   }
   
   .sign-in {
@@ -62,22 +68,22 @@
     color: #681cff;
   }
   
-  p {
+  .register-text {
     color: #681cff;
     font-size: 20px;
   }
   
-  a {
+  .signin-link {
     color: #681cff;
   }
   
-  a:link,
-  a:visited {
+  .signin-link:link,
+  .signin-link:visited {
     color: #681cff;
   }
   
-  a:hover {
-    color: #2727fa;
+  .signin-link:hover {
+    color: #5618d1;
   }
   
   .register-title {

@@ -55,6 +55,7 @@ label {
 
 .sign-in:hover {
   background-color: #570fe8;
+  color: #fff;
 }
 
 .cancel {
@@ -62,21 +63,21 @@ label {
   color: #681cff;
 }
 
-p {
+.reg-text {
   color: #681cff;
   font-size: 20px;
 }
 
-a {
+.login-link {
   color: #681cff;
 }
 
-a:link,
-a:visited {
+.login-link:link,
+.login-link:visited {
   color: #681cff;
 }
 
-a:hover {
+.login-link:hover {
   color: #2727fa;
 }
 

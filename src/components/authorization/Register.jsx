@@ -2,12 +2,13 @@ import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Login from './Login';
 import axios from 'axios';
 import "./register.css";
 
-const USER_REG = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REG = /^[A-z][A-z0-9-_]{4,10}$/;
 const PWD_REG = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REG_URL = './register';
+const REG_URL = 'register';
 
 const Register = () => {
     const userRef = useRef();
@@ -16,6 +17,7 @@ const Register = () => {
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const [password, setPassword] = useState('');
     const [validPassword, setValidPassword] = useState(false);
@@ -26,7 +28,6 @@ const Register = () => {
     const [matchFocus, setMatchFocus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -47,12 +48,8 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const input1 = USER_REG.test(user);
-        const input2 = PWD_REG.test(password);
-        if(!input1 || !input2){
-            setErrMsg('Invalid characters');
-            return;
-        }
+
+    
         try {
             const response = await axios.post(REG_URL,
                 JSON.stringify({ user, password }),
@@ -64,7 +61,11 @@ const Register = () => {
             setUser('');
             setPassword('');
             setMatchPassword('');
-            setSuccess(true);
+
+        if(navigate) {
+            return <Navigate to ="/menu" />;
+        }
+            
         } catch (err){
             if(!err?.response){
                 setErrMsg('No response from server')
@@ -77,6 +78,10 @@ const Register = () => {
         }
     }
         return (
+            <>
+            {success ? (
+				<Login />
+			) : (
                 <section className='register-container'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live ="assertive">{errMsg}</p>
                     <h1 className='register-title'>Welcome, register here</h1>
@@ -93,7 +98,6 @@ const Register = () => {
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
                             value={user}
-                            required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby = "uidnote"
                             onFocus={() => setUserFocus(true)}
@@ -115,7 +119,6 @@ const Register = () => {
                             id="password"
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}
-                            required
                             aria-invalid={validPassword ? "false" : "true"}
                             aria-describedby="passwordnote"
                             onFocus={() => setPasswordFocus(true)}
@@ -139,7 +142,6 @@ const Register = () => {
                             id="confirm_password"
                             onChange={(e) => setMatchPassword(e.target.value)}
                             value={matchPassword}
-                            required
                             aria-invalid={validMatch ? "false" : "true"}
                             aria-describedby="confirmnote"
                             onFocus={() => setMatchFocus(true)}
@@ -149,13 +151,15 @@ const Register = () => {
                             <FontAwesomeIcon icon={faInfoCircle} />
                             Must match the first password input field.
                         </p>
-                        <button disabled={!validName || !validPassword || !validMatch ? true : false}>Sign Up</button> 
+                        <button className='signin-btn'>Sign Up</button> 
                     </form>
-                    <p>
+                    <p className='register-text'>
                         Already registered? <br />
-                        <Link to="/Login">Sign in here</Link>
+                        <Link to="/Login" className='signin-link'>Sign in here</Link>
                     </p>
                 </section>
+            )}
+        </>
         )
     } 
 

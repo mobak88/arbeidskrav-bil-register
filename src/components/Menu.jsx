@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+
+import { Link  } from "react-router-dom";
+
 import "./menu.css";
 
 const Menu = () => {
+
+
     return (
        <nav className="menu-section">
         <h1> Hey and welcome to the main page</h1>

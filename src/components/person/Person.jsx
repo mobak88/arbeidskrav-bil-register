@@ -131,7 +131,7 @@ const Person = () => {
                 <p className='cars-owned'>{person?.carsOwned}</p>
               </div>
               <div className='button-wrapper'>
-                <button onClick={() => getUserId(person.id)}>Edit</button>
+                <button className='person-btn' onClick={() => getUserId(person.id)}>Edit</button>
               </div>
             </div>
           );
