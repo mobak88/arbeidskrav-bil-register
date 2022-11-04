@@ -4,7 +4,7 @@ import useAxiosFetch from '../../hooks/useAxiosFetch';
 import API_ENDPOINTS from '../../api/endpoints';
 import './Person.css';
 
-const FindPerson = () => {
+const FindPerson = ({ deletePersonHandler }) => {
   const [isFindingPerson, setIsFindingPerson] = useState(false);
   const [chosenPerson, setChosenPerson] = useState({});
 
@@ -47,6 +47,11 @@ const FindPerson = () => {
   };
 
   console.log(chosenPerson);
+
+  const deleteFoundPerson = (id) => {
+    deletePersonHandler(id);
+    setChosenPerson({});
+  };
 
   return (
     <>
@@ -119,7 +124,9 @@ const FindPerson = () => {
                 <button onClick={updatePersonHandler}>Edit</button>
               </div>
               <div className='button-wrapper'>
-                <button>Delete</button>
+                <button onClick={() => deleteFoundPerson(chosenPerson.id)}>
+                  Delete
+                </button>
               </div>
               <div className='button-wrapper'>
                 <button onClick={() => setChosenPerson({})}>Close</button>
