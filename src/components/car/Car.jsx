@@ -71,10 +71,10 @@ const Car = () => {
               <p>Year: {car?.year}</p>
               <p>Owner</p>
               <div className='button-wrapper'>
-                <button onClick={() => updateCarHandler(car.id)}>Edit</button>
+                <button>Edit</button>
               </div>
               <div className='button-wrapper'>
-                <button onClick={() => deleteCarHandler(car.id)}>Delete</button>
+                <button>Delete</button>
               </div>
             </div>
           );
