@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import "./createPerson.css";
 
 const CreatePerson = () => {
   const [firstName, setFirstName] = useState('');
@@ -8,6 +10,7 @@ const CreatePerson = () => {
   const [carsOwned, setCarsOwned] = useState(null);
 
   const sendDataToAPI = () => {
+    e.preventDefault();
     axios.post('http://194.32.107.29/GaAPI/person', {
       firstName,
       lastName,
@@ -16,31 +19,28 @@ const CreatePerson = () => {
     });
   };
 
-  const test = () => {
-    console.log('Return to start menu');
-  };
-
   return (
-    <div>
-      <form> 
-          <label htmlFor='fname'>First Name</label>
-          <input
+    <div className='createPerson-container'>
+      <form className='createPerson-form'>
+        <h1 className='createPerson-title'>Create a new user</h1> 
+          <label  className='label-deco' htmlFor='fname'>First Name</label>
+          <input className='input-decoration'
             name='fname'
             id='fname'
             onChange={(e) => setFirstName(e.target.value)}
             placeholder='First Name'
           />
 
-          <label htmlFor='lname'>Last Name</label>
-          <input
+          <label  className='label-deco' htmlFor='lname'>Last Name</label>
+          <input className='input-decoration'
             name='lname'
             id='lname'
             onChange={(e) => setLastName(e.target.value)}
             placeholder='Last Name'
           />
     
-          <label htmlFor='age'>Age</label>
-          <input
+          <label className='label-deco' htmlFor='age'>Age</label>
+          <input className='input-decoration'
             type='number'
             name='age'
             id='age'
@@ -48,18 +48,18 @@ const CreatePerson = () => {
             placeholder='Your age'
           />
 
-          <label htmlFor='carOwned'>Cars you own </label>
-          <input
+          <label className='label-deco' htmlFor='carOwned'>Cars you own </label>
+          <input className='input-decoration'
             name='carOwned'
             id='carOwned'
             onChange={(e) => setCarsOwned(e.target.value)}
             placeholder='Your Carbrand'
           />
 
-        <button type='submit' onClick={sendDataToAPI}>
+        <button className="btn" type='submit' onClick={sendDataToAPI}>
           Submit
         </button>
-        <button onClick={test}>Cancel</button>
+        <Link to ="/menu"><button className='btn'>Cancel</button></Link>
       </form>
     </div>
   );

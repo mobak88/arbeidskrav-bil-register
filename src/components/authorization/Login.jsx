@@ -34,7 +34,7 @@ const handleSubmit = (e) => {
                 <section className="login-container">
                     <h1 className="signin-title">Sign In</h1>
                     <form className="login-form" onSubmit={handleSubmit}>
-                        <label classname="label-deco" htmlFor="username">Username:</label>
+                        <label classname="label-deco-l" htmlFor="username">Username:</label>
                         <input
 							className="input-decoration"
                             type="text"
@@ -45,7 +45,7 @@ const handleSubmit = (e) => {
                             required
                         />
 
-                        <label classname="label-deco" htmlFor="password">Password:</label>
+                        <label classname="label-deco-l" htmlFor="password">Password:</label>
                         <input
 							className="input-decoration"
                             type="password"

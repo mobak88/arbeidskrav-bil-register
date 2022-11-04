@@ -4,18 +4,19 @@ import './menu.css';
 
 const Menu = () => {
   return (
+    
     <nav className='menu-section'>
-      <h1> Hey and welcome to the main page</h1>
-      <p>Here you can access your data</p>
+      <h1 className='menu-title'> Hey and welcome to the main page</h1>
+      <p className='menu-info'>Here you can access your data</p>
       <div className='link-container'>
         <Link to='/person'>
-          <button className='btn'>Users</button>
+          <button className='menu-btn'>Users</button>
         </Link>
         <Link to='/car'>
-          <button className='btn'>Cars</button>
+          <button className='menu-btn'>Cars</button>
         </Link>
         <Link to='/createUser'>
-          <button className='btn'>Create new user</button>
+          <button className='menu-btn'>Create new user</button>
         </Link>
       </div>
     </nav>
