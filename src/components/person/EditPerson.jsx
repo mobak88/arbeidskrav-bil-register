@@ -1,14 +1,25 @@
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useEffect } from 'react';
 import PersonCtx from '../../contexts/personCtx';
+import useAxiosFetch from '../../hooks/useAxiosFetch';
+import API_ENDPOINTS from '../../api/endpoints';
 import './Person.css';
+import { useState } from 'react';
 
 const EditPerson = ({ personData }) => {
   const personCtx = useContext(PersonCtx);
+  const [chosenCar, setChosenCar] = useState('');
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const ageRef = useRef(null);
-  const carsOwnedRef = useRef(null);
+
+  const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
+
+  useEffect(() => {
+    if (data.cars) {
+      console.log(data);
+    }
+  }, [data]);
 
   const submitPersonForm = (e) => {
     e.preventDefault();
@@ -27,10 +38,7 @@ const EditPerson = ({ personData }) => {
           ? lastNameRef.current
           : personData.lastName,
       age: ageRef.current.length > 0 ? ageRef.current : personData.age,
-      carsOwned:
-        carsOwnedRef.current.length > 0
-          ? carsOwnedRef.current
-          : personData.carsOwned
+      carsOwned: chosenCar !== 'default' ? chosenCar : personData.carsOwned
     });
   };
 
@@ -78,16 +86,25 @@ const EditPerson = ({ personData }) => {
         />
       </div>
       <div className='form-input-container'>
-        <label htmlFor='cars-owned'>Cars Owned:</label>
-        <input
-          type='text'
+        <label htmlFor='cars-owned'>Choose a car:</label>
+        <select
+          name='cars-owned'
           id='cars-owned'
-          ref={carsOwnedRef}
-          defaultValue={personData?.carsOwned || ''}
           onChange={(e) => {
-            carsOwnedRef.current = e.target.value;
+            setChosenCar(e.target.value);
           }}
-        />
+          defaultValue='default'
+        >
+          <option value={'default'}>Choose car</option>
+          {data.cars &&
+            data.cars.map((car) => {
+              return (
+                <option key={car.id} value={car?.id}>
+                  {car?.make}
+                </option>
+              );
+            })}
+        </select>
       </div>
       <button onClick={submitPersonForm}>Update</button>
       <button onClick={cancelUpdate}>Cancel</button>

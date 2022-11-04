@@ -10,6 +10,7 @@ const Car = () => {
   const [isEditingCar, setIsEditingCar] = useState(false);
   const [carData, setCarData] = useState({});
   const [allCars, setAllCars] = useState([]);
+
   const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
 
   useEffect(() => {

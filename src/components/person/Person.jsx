@@ -48,12 +48,21 @@ const Person = () => {
     }
   }, [userId]);
 
+  useEffect(() => {
+    if (data?.persons) {
+      data.cars.filter((car) => {
+        if (car.id === parseInt(personData.carsOwned)) {
+          return car;
+        }
+      });
+    }
+  }, [personData]);
+
   const updatePersonHandler = (personId) => {
     if (!isEditingPerson) {
       setIsEditingPerson((prevState) => !prevState);
     }
     setUserId(personId);
-    console.log(personId);
     const { persons } = data;
     const [person] = persons.filter((user) => user.id === userId);
     setPersonData({ ...person });
@@ -90,7 +99,27 @@ const Person = () => {
                     Name: {person?.firstName} {person?.lastName}
                   </p>
                   <p className='age'>Age: {person?.age}</p>
-                  <p className='cars-owned'>Cars owned: {person?.carsOwned}</p>
+                  {!person.carsOwned && (
+                    <div key={Math.random()}>
+                      <p className='cars-owned'>
+                        <b>Cars owned:</b>
+                      </p>
+                      <p className='cars-owned'>No cars owned</p>
+                    </div>
+                  )}
+                  {data.cars.map((car) => {
+                    if (car.id === parseInt(person.carsOwned)) {
+                      return (
+                        <div key={car.id}>
+                          <p className='cars-owned'>
+                            <b>Cars owned:</b>
+                          </p>
+                          <p className='cars-owned'>Make: {car?.make}</p>
+                          <p className='cars-owned'>Model: {car?.model}</p>
+                        </div>
+                      );
+                    }
+                  })}
                 </div>
                 <div className='button-wrapper'>
                   <button onClick={() => updatePersonHandler(person.id)}>
