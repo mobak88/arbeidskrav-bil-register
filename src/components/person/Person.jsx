@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
 import API_ENDPOINTS from '../../api/endpoints';
 import EditPerson from './EditPerson';
+import FindPerson from './FindPerson';
 import PersonCtx from '../../contexts/personCtx';
 import { deleteFromAPI, updateToAPI } from '../../helpers/httpReuqests';
 import './Person.css';
@@ -85,10 +86,13 @@ const Person = () => {
         setIsEditingPerson
       }}
     >
-      <div className='persons-container'>
-        {isLoading && 'Loading...'}
+      <div className='edit-person-container'>
         {fetchError && `Error: ${fetchError}`}
+        {isLoading && 'Loading...'}
+        {allPersonsData && <FindPerson />}
         {isEditingPerson && <EditPerson personData={personData} />}
+      </div>
+      <div className='persons-container'>
         {allPersonsData &&
           allPersonsData.map((person) => {
             return (
