@@ -83,7 +83,8 @@ const Person = () => {
         personFormValue,
         setPersonFormValue,
         isEditingPerson,
-        setIsEditingPerson
+        setIsEditingPerson,
+        allPersonsData
       }}
     >
       <div className='edit-person-container'>
