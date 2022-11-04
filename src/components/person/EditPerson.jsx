@@ -15,12 +15,6 @@ const EditPerson = ({ personData }) => {
 
   const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
 
-  useEffect(() => {
-    if (data.cars) {
-      console.log(data);
-    }
-  }, [data]);
-
   const submitPersonForm = (e) => {
     e.preventDefault();
     getFormValue();
@@ -38,8 +32,9 @@ const EditPerson = ({ personData }) => {
           ? lastNameRef.current
           : personData.lastName,
       age: ageRef.current.length > 0 ? ageRef.current : personData.age,
-      carsOwned: chosenCar !== 'default' ? chosenCar : personData.carsOwned
+      carsOwned: chosenCar !== '' ? chosenCar : personData.carsOwned
     });
+    console.log(chosenCar);
   };
 
   const cancelUpdate = (e) => {
