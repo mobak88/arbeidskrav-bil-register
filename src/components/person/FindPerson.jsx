@@ -8,7 +8,19 @@ const FindPerson = () => {
   const [isFindingPerson, setIsFindingPerson] = useState(false);
   const [chosenPerson, setChosenPerson] = useState({});
 
-  const { allPersonsData } = useContext(PersonCtx);
+  const {
+    allPersonsData,
+    isEditingPerson,
+    setIsEditingPerson,
+    setUserId,
+    personData,
+    setPersonData
+  } = useContext(PersonCtx);
+
+  useEffect(() => {
+    setChosenPerson({ ...personData });
+    console.log(chosenPerson);
+  }, [personData]);
 
   const { data, fetchError, isLoading } = useAxiosFetch(`${API_ENDPOINTS.all}`);
 
@@ -23,6 +35,18 @@ const FindPerson = () => {
     );
     setChosenPerson(...newFoundPerson);
   };
+
+  const updatePersonHandler = () => {
+    if (!isEditingPerson) {
+      setIsEditingPerson((prevState) => !prevState);
+    }
+    setUserId(chosenPerson.id);
+    const { persons } = data;
+    const [person] = persons.filter((user) => user.id === chosenPerson.id);
+    setPersonData({ ...person });
+  };
+
+  console.log(chosenPerson);
 
   return (
     <>
@@ -92,7 +116,13 @@ const FindPerson = () => {
                   }
                 })}
               <div className='button-wrapper'>
-                <button>Edit</button>
+                <button onClick={updatePersonHandler}>Edit</button>
+              </div>
+              <div className='button-wrapper'>
+                <button>Delete</button>
+              </div>
+              <div className='button-wrapper'>
+                <button onClick={() => setChosenPerson({})}>Close</button>
               </div>
             </div>
           )}
