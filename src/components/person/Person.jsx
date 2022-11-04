@@ -83,13 +83,21 @@ const Person = () => {
         personFormValue,
         setPersonFormValue,
         isEditingPerson,
-        setIsEditingPerson
+        setIsEditingPerson,
+        allPersonsData,
+        isEditingPerson,
+        setIsEditingPerson,
+        setUserId,
+        personData,
+        setPersonData
       }}
     >
       <div className='edit-person-container'>
         {fetchError && `Error: ${fetchError}`}
         {isLoading && 'Loading...'}
-        {allPersonsData && <FindPerson />}
+        {allPersonsData && (
+          <FindPerson deletePersonHandler={deletePersonHandler} />
+        )}
         {isEditingPerson && <EditPerson personData={personData} />}
       </div>
       <div className='persons-container'>
