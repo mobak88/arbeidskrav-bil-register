@@ -99,6 +99,14 @@ const Person = () => {
                     Name: {person?.firstName} {person?.lastName}
                   </p>
                   <p className='age'>Age: {person?.age}</p>
+                  {!person.carsOwned && (
+                    <div key={Math.random()}>
+                      <p className='cars-owned'>
+                        <b>Cars owned:</b>
+                      </p>
+                      <p className='cars-owned'>No cars owned</p>
+                    </div>
+                  )}
                   {data.cars.map((car) => {
                     if (car.id === parseInt(person.carsOwned)) {
                       return (
