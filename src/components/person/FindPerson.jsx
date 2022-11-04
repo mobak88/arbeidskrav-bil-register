@@ -60,40 +60,42 @@ const FindPerson = () => {
             <button onClick={closeFindPerson}>Close</button>
           </form>
 
-          <div className='person-container'>
-            <div className='information-wrapper'>
-              <h3>Information</h3>
-              <p className='first-name'>
-                Name: {chosenPerson?.firstName} {chosenPerson?.lastName}
-              </p>
-              <p className='age'>Age: {chosenPerson?.age}</p>
-            </div>
-            {!chosenPerson.carsOwned && (
-              <div>
-                <p className='cars-owned'>
-                  <b>Cars owned:</b>
+          {Object.keys(chosenPerson).length !== 0 && (
+            <div className='person-container'>
+              <div className='information-wrapper'>
+                <h3>Information</h3>
+                <p className='first-name'>
+                  Name: {chosenPerson?.firstName} {chosenPerson?.lastName}
                 </p>
-                <p className='cars-owned'>No cars owned</p>
+                <p className='age'>Age: {chosenPerson?.age}</p>
               </div>
-            )}
-            {chosenPerson.carsOwned &&
-              data.cars.map((car) => {
-                if (car.id === parseInt(chosenPerson.carsOwned)) {
-                  return (
-                    <div key={car.id}>
-                      <p className='cars-owned'>
-                        <b>Cars owned:</b>
-                      </p>
-                      <p className='cars-owned'>Make: {car?.make}</p>
-                      <p className='cars-owned'>Model: {car?.model}</p>
-                    </div>
-                  );
-                }
-              })}
-            <div className='button-wrapper'>
-              <button>Edit</button>
+              {!chosenPerson.carsOwned && (
+                <div>
+                  <p className='cars-owned'>
+                    <b>Cars owned:</b>
+                  </p>
+                  <p className='cars-owned'>No cars owned</p>
+                </div>
+              )}
+              {chosenPerson.carsOwned &&
+                data.cars.map((car) => {
+                  if (car.id === parseInt(chosenPerson.carsOwned)) {
+                    return (
+                      <div key={car.id}>
+                        <p className='cars-owned'>
+                          <b>Cars owned:</b>
+                        </p>
+                        <p className='cars-owned'>Make: {car?.make}</p>
+                        <p className='cars-owned'>Model: {car?.model}</p>
+                      </div>
+                    );
+                  }
+                })}
+              <div className='button-wrapper'>
+                <button>Edit</button>
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </>
