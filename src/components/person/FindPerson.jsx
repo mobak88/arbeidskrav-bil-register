@@ -59,7 +59,7 @@ const FindPerson = () => {
       )}
       {isFindingPerson && (
         <>
-          <form className='edit-person-form' action=''>
+          <form className='edit-person-form find-person-form' action=''>
             <div className='form-input-container'>
               <label htmlFor='person'>Find a person:</label>
               <select
@@ -87,7 +87,7 @@ const FindPerson = () => {
           {Object.keys(chosenPerson).length !== 0 && (
             <div className='person-container'>
               <div className='information-wrapper'>
-                <h3>Information</h3>
+                <h3>Found person</h3>
                 <p className='first-name'>
                   Name: {chosenPerson?.firstName} {chosenPerson?.lastName}
                 </p>
